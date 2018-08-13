@@ -1,4 +1,5 @@
 var promises = require('./lib/promises');
+var fsp = require('./lib/fsp');
 
 // promises.hello.then(function(result){
 //   console.log(result);
@@ -34,8 +35,33 @@ var promises = require('./lib/promises');
 //   console.error(err);
 // });
 
-promises.doBadThings(false).then((result) => {
-  console.log(result)
-}, (err) => {
-  console.error(err);
-});
+// promises.doBadThings(false).then((result) => {
+//   console.log(result)
+// }, (err) => {
+//   console.error(err);
+// });
+
+fsp.readFile('./lib/dummy.txt').then((result) => {
+  debugger;
+  console.log(result);
+})
+
+fsp.writeFile('./lib/dummy.txt', 'Yeah!')
+  .then(function(res) {
+    // Outputs the file data
+    // after writing
+    console.log(res);
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
+
+  fsp.appendFile('./lib/dummy.txt', 'Hello again!')
+  .then(function(res) {
+    // Outputs the file data
+    // after appending
+    console.log(res);
+  })
+  .catch(function(err) {
+    console.error(err);
+  });
